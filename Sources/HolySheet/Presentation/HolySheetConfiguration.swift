@@ -8,6 +8,6 @@
 import UIKit
 
 public struct HolySheetConfiguration {
-    let radius: CGFloat = 56.0
-    let backgroundColor: UIColor = .white
+    public var radius: CGFloat = 56.0
+    public var backgroundColor: UIColor = .white
 }
