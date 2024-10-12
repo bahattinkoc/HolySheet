@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ResizableTableView: UITableView {
-    override var contentSize: CGSize {
+public class ResizableTableView: UITableView {
+    public override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()
         }
     }
 
-    override var intrinsicContentSize: CGSize { contentSize }
+    public override var intrinsicContentSize: CGSize { contentSize }
 }

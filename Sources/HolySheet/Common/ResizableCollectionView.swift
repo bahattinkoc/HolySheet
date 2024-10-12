@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ResizableCollectionView: UICollectionView {
-    override var contentSize: CGSize {
+public class ResizableCollectionView: UICollectionView {
+    public override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()
         }
     }
 
-    override var intrinsicContentSize: CGSize { contentSize }
+    public override var intrinsicContentSize: CGSize { contentSize }
 }

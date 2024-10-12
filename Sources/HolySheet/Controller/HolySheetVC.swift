@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HolySheetVC: UIViewController {
+public final class HolySheetVC: UIViewController {
 
     // MARK: - IBOUTLET
 
@@ -28,18 +28,18 @@ final class HolySheetVC: UIViewController {
     /// If your content already has scrollable components like tableView etc. just leave it as default.
     ///
     /// The default value is `false`.
-    var needScrollableView = false
+    public var needScrollableView = false
 
     /// Set this property to `true` if you have a content that can vertically resize according to it's content.
     /// Setting this `true` will cause your content to expand the with the `HolySheet`'s content size.
-    var hasFlexibleContent = true
+    public var hasFlexibleContent = true
 
     /// Sets visibility of indicator view.
-    var isIndicatorViewHidden = false
+    public var isIndicatorViewHidden = false
 
     // MARK: - OVERRIDE FUNCTIONS
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
@@ -55,12 +55,12 @@ final class HolySheetVC: UIViewController {
         setupContainerView()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         dismissAction?()
     }
 
-    override func viewLayoutMarginsDidChange() {
+    public override func viewLayoutMarginsDidChange() {
         super.viewLayoutMarginsDidChange()
         guard let frame = bottomPresentationController?.currentFrame, !isBeingPresented else { return }
         view.frame = frame
@@ -68,7 +68,7 @@ final class HolySheetVC: UIViewController {
 
     // MARK: - INIT
 
-    init(contentVC: UIViewController, data: Any?) {
+    public init(contentVC: UIViewController, data: Any?) {
         contentViewController = contentVC
         if let data = data as? (() -> Void) {
             dismissAction = data
@@ -78,11 +78,11 @@ final class HolySheetVC: UIViewController {
         modalPresentationStyle = .custom
     }
 
-    required init?(coder: NSCoder) { fatalError() }
+    public required init?(coder: NSCoder) { fatalError() }
 
     // MARK: - PUBLIC FUNCTIONS
 
-    @objc func layoutBottomContentViewBeforePresenting() {
+    @objc public func layoutBottomContentViewBeforePresenting() {
         guard let bottomPresentationController, bottomPresentationController.gestureState != .changed else { return }
 
         UIView.animate(withDuration: 0.3) {
@@ -150,17 +150,17 @@ final class HolySheetVC: UIViewController {
 // MARK: - UIViewControllerTransitioningDelegate
 
 extension HolySheetVC: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         HolySheetPresentationController(presentedViewController: presented, presenting: presenting)
     }
 
-    func animationController(forPresented presented: UIViewController,
+    public func animationController(forPresented presented: UIViewController,
                              presenting: UIViewController,
                              source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         HolySheetAnimationController(transitionStyle: .presentation)
     }
 
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         HolySheetAnimationController(transitionStyle: .dismissal)
     }
 }
