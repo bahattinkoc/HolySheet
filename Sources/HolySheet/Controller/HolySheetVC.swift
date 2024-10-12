@@ -73,7 +73,7 @@ public final class HolySheetVC: UIViewController {
         if let data = data as? (() -> Void) {
             dismissAction = data
         }
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "HolySheetVC", bundle: Bundle.module)
         transitioningDelegate = self
         modalPresentationStyle = .custom
     }
