@@ -18,6 +18,7 @@ public final class HolySheetVC: UIViewController {
     private var contentViewController: UIViewController
     private var parentView: UIView?
     private var dismissAction: (() -> Void)?
+    private var configuration = HolySheetConfiguration()
     private var bottomPresentationController: HolySheetPresentationController? {
         presentationController as? HolySheetPresentationController
     }
@@ -41,9 +42,9 @@ public final class HolySheetVC: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = configuration.backgroundColor
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        view.layer.cornerRadius = Constant.cornerRadius
+        view.layer.cornerRadius = configuration.radius
         if #available(iOS 13.0, *) {
             view.layer.cornerCurve = .continuous
         }
@@ -68,10 +69,15 @@ public final class HolySheetVC: UIViewController {
 
     // MARK: - INIT
 
-    public init(contentVC: UIViewController, data: Any?) {
+    public init(contentVC: UIViewController,
+                configuration: HolySheetConfiguration? = nil,
+                data: Any? = nil) {
         contentViewController = contentVC
         if let data = data as? (() -> Void) {
             dismissAction = data
+        }
+        if let configuration {
+            self.configuration = configuration
         }
         super.init(nibName: "HolySheetVC", bundle: Bundle.module)
         transitioningDelegate = self
@@ -112,7 +118,7 @@ public final class HolySheetVC: UIViewController {
 
     private func setupVC(with parentView: UIView) {
         guard let contentView = contentViewController.view else { return }
-        contentView.layer.cornerRadius = Constant.cornerRadius
+        contentView.layer.cornerRadius = configuration.radius
         if #available(iOS 13.0, *) {
             contentView.layer.cornerCurve = .continuous
         }
@@ -169,7 +175,6 @@ extension HolySheetVC: UIViewControllerTransitioningDelegate {
 
 private extension HolySheetVC {
     enum Constant {
-        static let cornerRadius = 56.0
         static let indicatorViewBottomAnchor = 16.0
     }
 }
