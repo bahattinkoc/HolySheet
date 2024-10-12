@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ResizableViewController: UIViewController {
+class ResizableViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         UIView.animate(withDuration: HolySheetAnimationController.Constant.animationDuration) {

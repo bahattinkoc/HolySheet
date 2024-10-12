@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ResizableTableView: UITableView {
+class ResizableTableView: UITableView {
     override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()

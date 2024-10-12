@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ResizableScrollView: UIScrollView {
+class ResizableScrollView: UIScrollView {
     override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()
