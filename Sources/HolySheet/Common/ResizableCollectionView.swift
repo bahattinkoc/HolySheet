@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class ResizableCollectionView: UICollectionView {
+open class ResizableCollectionView: UICollectionView {
     public override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()
